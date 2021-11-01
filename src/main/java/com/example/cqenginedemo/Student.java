@@ -5,6 +5,7 @@ import com.googlecode.cqengine.attribute.MultiValueAttribute;
 import com.googlecode.cqengine.query.option.QueryOptions;
 import lombok.Value;
 
+import java.io.Serializable;
 import java.util.List;
 
 import static com.googlecode.cqengine.query.QueryFactory.attribute;
@@ -12,10 +13,10 @@ import static com.googlecode.cqengine.query.QueryFactory.attribute;
 @Value
 public class Student {
 
-    int indexNumber;
-    String name;
-    String surname;
-    List<Course> courses;
+     int indexNumber;
+     String name;
+     String surname;
+     List<Course> courses;
 
     public static final Attribute<Student, Integer> STUDENT_ID = attribute("index_number", Student::getIndexNumber);
     public static final Attribute<Student, String> STUDENT_NAME = attribute("name", Student::getName);
@@ -32,4 +33,7 @@ public class Student {
         }
     };
 
+    public static List<? extends Attribute<Student, ? extends Serializable>> getAllAttributes() {
+        return List.of(STUDENT_ID, STUDENT_NAME, STUDENT_SURNAME, COURSE_NAME, COURSE_DESCRIPTION);
+    }
 }
